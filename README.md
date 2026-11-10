@@ -46,7 +46,7 @@ data, `train_test_subject_overlap` (0 under the leakage-safe protocol).
 | Result in the paper | Value | Source of the number | Re-run with this repository? |
 |---|---|---|---|
 | EEGNet, L0 | 75.16 % | Original notebook, output preserved in `original_notebooks/` | **Re-run: 74.68 %** (Colab T4, TF 2.21) |
-| Four-class CNN | 66 % | Original notebook, output preserved (66.48 % at 100 epochs) | Same configuration in `run_fourclass_cnn.py`; not re-run here |
+| Four-class CNN | 66 % | Original notebook, output preserved (66.48 % at 100 epochs) | **Re-run: 64.63 % trial-level, 58.33 % subject-wise (L0)** |
 | CSP+CNN, L0 | 59.39 % | Re-run of this code (Colab T4); original 62.35 % run used a split that could not be recovered | **Re-run: 59.39 % (L0), 61.33 % (L2)** |
 | 1D CNN, L0 | 64.65 % | Re-run of this code (Colab T4) | **Re-run: 64.65 % (L0)** |
 | Ablation, 1D CNN L2 / as executed | 68.31 % / 69.53 % | Re-run of this code (Colab T4); replaces the unsupported 80.02 % | **Re-run** |
