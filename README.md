@@ -45,21 +45,20 @@ data, `train_test_subject_overlap` (0 under the leakage-safe protocol).
 
 | Result in the paper | Value | Source of the number | Re-run with this repository? |
 |---|---|---|---|
-| EEGNet, L0 | 75.16 % | Original notebook, output preserved in `original_notebooks/` | Same configuration in `run_group_aware_eegnet.py`; not re-run here |
+| EEGNet, L0 | 75.16 % | Original notebook, output preserved in `original_notebooks/` | **Re-run: 74.68 %** (Colab T4, TF 2.21) |
 | Four-class CNN | 66 % | Original notebook, output preserved (66.48 % at 100 epochs) | Same configuration in `run_fourclass_cnn.py`; not re-run here |
-| CSP+CNN | 62.35 % | Original code not in the archive | Reimplemented; **must be re-run** |
-| 1D CNN | 71.46 % | Original code not in the archive | Reimplemented; **must be re-run** |
-| Ablation, 1D CNN L2 | 80.02 % | No code or output found for this run | `run_benchmark.py --ablation`; **must be re-run before the figure is used** |
+| CSP+CNN, L0 | 59.39 % | Re-run of this code (Colab T4); original 62.35 % run used a split that could not be recovered | **Re-run: 59.39 % (L0), 61.33 % (L2)** |
+| 1D CNN, L0 | 64.65 % | Re-run of this code (Colab T4) | **Re-run: 64.65 % (L0)** |
+| Ablation, 1D CNN L2 / as executed | 68.31 % / 69.53 % | Re-run of this code (Colab T4); replaces the unsupported 80.02 % | **Re-run** |
 
-## Points to resolve against the manuscript
+## Notes on the measured results
 
-* The 71.46 % 1D CNN figure is, per the companion case-study paper, a **record-level** result with the test
-  set reused for validation (as-executed protocol), not an L0 result. Table 5 / Table 7 of the benchmark
-  should use the L0 and L2 numbers produced by `run_benchmark.py --models conv1d --ablation`.
-* The four-class CNN was trained on a **trial-level** split (one permutation of all trials, 90/10) and is
-  ~15.0 M parameters; its classes are left fist, right fist, both feet and **rest** (R01 baseline windows),
-  not "both fists".
-* The CSP+CNN head as described has 9,473 trainable parameters (see `tests/test_models.py`), not ≈2,993.
+* Measured on Google Colab (NVIDIA T4, TensorFlow 2.21) with `notebooks/reproduce_mi_results.ipynb`, 10–11 Nov 2026.
+* The 71.46 % 1D CNN figure of the companion case study is a **record-level** result with the test set reused for
+  validation. The benchmark's Tables 5 and 7 now use the L0 (64.65 %) and L2 (68.31 %) re-runs.
+* The four-class CNN was trained on a **trial-level** split (one permutation of all trials, 90/10) and has
+  ~15.0 M parameters; its classes are left fist, right fist, both feet and **rest** (R01 baseline windows).
+* The CSP+CNN head has 9,473 trainable parameters (see `tests/test_models.py`).
 
 ## Repository layout
 
