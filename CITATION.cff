@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+message: If you use this software, please cite the accompanying manuscript.
+title: "eeg-mi-leakage-benchmark"
+type: software
+license: MIT
+repository-code: https://github.com/aftab802/eeg-mi-leakage-benchmark
+version: 1.0.0
+date-released: '2026-11-11'
+authors:
+  - family-names: "ur Rehman"
+    given-names: "Muhammad Aftab"
+    affiliation: "CYBEX – School of IT Professionals (Pvt) Limited, Faisalabad, Pakistan"
+  - family-names: "ur Rehman"
+    given-names: "Muhammad Awais"
+    affiliation: "CYBEX – School of IT Professionals (Pvt) Limited, Faisalabad, Pakistan"
+  - family-names: "Asghar"
+    given-names: "Kiran"
+    affiliation: "The University of Faisalabad, Pakistan"
+  - family-names: "Zahra"
+    given-names: "Farwa"
+    affiliation: "The University of Faisalabad, Pakistan"
+  - family-names: "Aamir"
+    given-names: "Laiba"
+    affiliation: "The University of Faisalabad, Pakistan"
+  - family-names: "Maqbool"
+    given-names: "Fatima"
+    affiliation: "The University of Faisalabad, Pakistan"
+preferred-citation:
+  type: article
+  title: "A Systematic Benchmark of Motor Imagery Classifiers Under Leakage-Safe Evaluation"
+  status: submitted
+  year: 2026
+  authors:
+    - family-names: "ur Rehman"
+      given-names: "Muhammad Aftab"
+    - family-names: "ur Rehman"
+      given-names: "Muhammad Awais"
+    - family-names: "Asghar"
+      given-names: "Kiran"
+    - family-names: "Zahra"
+      given-names: "Farwa"
+    - family-names: "Aamir"
+      given-names: "Laiba"
+    - family-names: "Maqbool"
+      given-names: "Fatima"

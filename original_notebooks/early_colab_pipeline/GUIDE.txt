@@ -1,0 +1,61 @@
+
+project is on drive 
+
+
+
+
+
+END to end deep learning pipeline 
+we use T4 gpu of google colab
+
+we use physio net datastet  containing 109 subjects of brain signals
+we use command in collab that download datatset of 3GB direct into DRIVE
+we apply bandpass filter to clean raw data and resample it 
+
+we use CNN model EEGnet
+we aply z score normalization on raw dataset 
+
+we acquire accuracy of 83%
+we apply anti overfitting to stop model to memorize results 
+we apply normalization on model 
+
+
+
+
+
+
+
+
+
+
+
+Working: 
+
+changed my colab runtime gpu for extra performance
+we clone the repo on our colab 
+use scripts in repo to download raw data of 64 erlectrodes 
+colab uses new updated tensor flow 
+so we downgrade the tensor flow in our  main coding files  to get it run on colab 
+conected our google drive 
+ we install pyedflib library  to  convert .edf files into .mat  and save them in google drive 
+
+converting edf files into matlab .m files 
+
+now we have to run MATLAB file of GCN based model 
+for that we change its some code 
+we install Octave engine that ll run .MATLAB file for preprocessing
+
+updated the file
+ train and test the model but accuracy was 100% due to data leakage flaw in repo
+
+fix that leakage issue 
+
+PROBLEM indiacted ....
+wring dataset downloaded . 
+new dataset downloaded of BCI competition 
+model trained and tested GCNN
+
+
+we download raw data 
+clean it 
+train the models ( GCNN )  and test them 
