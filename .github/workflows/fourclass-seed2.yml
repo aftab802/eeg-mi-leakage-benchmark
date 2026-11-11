@@ -1,0 +1,23 @@
+name: fourclass-seed2
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/fourclass-seed2.yml"]
+jobs:
+  fourclass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt
+      - name: Four-class CNN, subject-wise split, 100 epochs, seed 2
+        run: python -u scripts/run_fourclass_cnn.py --epochs 100 --protocol L0 --seed 2 2>&1 | grep --line-buffered -E 'Epoch +[0-9]+ |Saved'
+      - name: Summary
+        run: |
+          python - <<'PY'
+          import glob, json
+          for f in sorted(glob.glob('results/*.json')):
+              v = json.load(open(f)); print('RESULT seed=2 fourclass_L0', round(v['test_accuracy'], 4), 'overlap', v.get('train_test_subject_overlap'))
+          PY
