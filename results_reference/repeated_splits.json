@@ -97,8 +97,21 @@
   }
  },
  "fourclass_L0_100ep": {
-  "42": 58.33,
-  "1": 67.86,
-  "note": "seeds 2-5 still running when this file was written"
- }
+  "runs": {
+   "42": 58.33,
+   "1": 67.86,
+   "3": 64.94,
+   "4": 55.95,
+   "5": 64.61
+  },
+  "summary": {
+   "mean": 62.34,
+   "sd": 4.98,
+   "min": 55.95,
+   "max": 67.86,
+   "n": 5
+  },
+  "note": "seed 2 exceeded the 6-hour CI job limit and was cancelled; not included. Matched trial-level re-run (single split): 64.63."
+ },
+ "seed_check": "Seeds 3 and 4 give the same CSP+CNN L2 accuracy (591/980) on different test sets with different confusion matrices; verified by .github/workflows/seed-check.yml (run 43026698733)."
 }
