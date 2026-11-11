@@ -1,0 +1,33 @@
+name: seed-check
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/seed-check.yml"]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt
+      - name: CSP+CNN L2, seeds 3 and 4
+        run: |
+          python scripts/run_csp_cnn.py --protocol L2 --seed 3 --outdir r3 2>&1 | tail -2
+          python scripts/run_csp_cnn.py --protocol L2 --seed 4 --outdir r4 2>&1 | tail -2
+      - name: Compare
+        run: |
+          python - <<'PY'
+          import glob, json, hashlib, sys
+          import numpy as np
+          sys.path.insert(0, '.')
+          from cybex_eeg.splits import trial_split
+          for s in (3, 4):
+              r = json.load(open(glob.glob(f'r{s}/*.json')[0]))
+              print('CHECK seed', s, 'acc', r['test_accuracy'], 'cm', r['confusion_matrix'])
+          y = np.r_[np.zeros(2449, int), np.ones(2449, int)]
+          for s in (3, 4):
+              te = np.sort(trial_split(y, random_state=s)['test'])
+              print('CHECK split seed', s, hashlib.md5(te.tobytes()).hexdigest(), te[:8].tolist())
+          PY
