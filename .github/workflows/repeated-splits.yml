@@ -1,0 +1,57 @@
+name: repeated-splits
+on:
+  workflow_dispatch:
+  push:
+    paths: [".github/workflows/repeated-splits.yml"]
+jobs:
+  binary:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt
+      - name: 1D CNN (L0, L2, as executed), CSP+CNN (L0), EEGNet (L0)
+        run: python scripts/run_benchmark.py --models csp,eegnet,conv1d --ablation --seed ${{ matrix.seed }} 2>&1 | grep -v -E 'Downloading|^Epoch|step - |Subject +[0-9]+:|Montage|set_montage|EEGBCI' | tail -15
+      - name: CSP+CNN (L2)
+        run: python scripts/run_csp_cnn.py --protocol L2 --seed ${{ matrix.seed }} 2>&1 | tail -2
+      - name: Summary
+        run: |
+          python - <<'PY'
+          import glob, json
+          for f in sorted(glob.glob('results/*.json')):
+              r = json.load(open(f))
+              items = r.items() if all(isinstance(v, dict) and 'test_accuracy' in v for v in r.values()) else [(f.split('/')[-1][:10], r)]
+              for k, v in items:
+                  print('RESULT seed=${{ matrix.seed }}', k, round(v['test_accuracy'], 4), 'overlap', v.get('train_test_subject_overlap'))
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: "binary-seed-${{ matrix.seed }}", path: results/}
+  fourclass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11", cache: pip}
+      - run: pip install -r requirements.txt
+      - name: Four-class CNN, subject-wise split, 100 epochs
+        run: python scripts/run_fourclass_cnn.py --epochs 100 --protocol L0 --seed ${{ matrix.seed }} 2>&1 | grep -E 'Epoch +([0-9]*0|[0-9]*5) |Saved'
+      - name: Summary
+        run: |
+          python - <<'PY'
+          import glob, json
+          for f in sorted(glob.glob('results/*.json')):
+              v = json.load(open(f)); print('RESULT seed=${{ matrix.seed }} fourclass_L0', round(v['test_accuracy'], 4), 'overlap', v.get('train_test_subject_overlap'))
+          PY
+      - uses: actions/upload-artifact@v4
+        with: {name: "fourclass-seed-${{ matrix.seed }}", path: results/}
