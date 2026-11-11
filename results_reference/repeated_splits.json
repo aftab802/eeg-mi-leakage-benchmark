@@ -1,0 +1,104 @@
+{
+ "seeds": [
+  42,
+  1,
+  2,
+  3,
+  4,
+  5
+ ],
+ "note": "seed 42 on Colab T4 GPU; seeds 1-5 on GitHub Actions CPU, workflow repeated-splits.yml, run 42983524819. Test accuracy in percent.",
+ "runs": {
+  "eegnet_L0": [
+   74.68,
+   72.77,
+   76.51,
+   74.44,
+   70.79,
+   78.82
+  ],
+  "csp_cnn_L0": [
+   59.39,
+   62.36,
+   60.91,
+   62.29,
+   58.66,
+   64.16
+  ],
+  "csp_cnn_L2": [
+   61.33,
+   59.08,
+   61.53,
+   60.31,
+   60.31,
+   57.14
+  ],
+  "conv1d_L0": [
+   64.65,
+   65.94,
+   66.41,
+   64.5,
+   63.02,
+   69.19
+  ],
+  "conv1d_L2": [
+   68.31,
+   71.46,
+   65.52,
+   69.53,
+   69.53,
+   65.77
+  ],
+  "conv1d_as_executed": [
+   69.53,
+   71.71,
+   70.8,
+   71.05,
+   53.68,
+   68.82
+  ]
+ },
+ "summary": {
+  "eegnet_L0": {
+   "mean": 74.67,
+   "sd": 2.8,
+   "min": 70.79,
+   "max": 78.82
+  },
+  "csp_cnn_L0": {
+   "mean": 61.29,
+   "sd": 2.05,
+   "min": 58.66,
+   "max": 64.16
+  },
+  "csp_cnn_L2": {
+   "mean": 59.95,
+   "sd": 1.63,
+   "min": 57.14,
+   "max": 61.53
+  },
+  "conv1d_L0": {
+   "mean": 65.62,
+   "sd": 2.12,
+   "min": 63.02,
+   "max": 69.19
+  },
+  "conv1d_L2": {
+   "mean": 68.35,
+   "sd": 2.33,
+   "min": 65.52,
+   "max": 71.46
+  },
+  "conv1d_as_executed": {
+   "mean": 67.6,
+   "sd": 6.9,
+   "min": 53.68,
+   "max": 71.71
+  }
+ },
+ "fourclass_L0_100ep": {
+  "42": 58.33,
+  "1": 67.86,
+  "note": "seeds 2-5 still running when this file was written"
+ }
+}

@@ -94,3 +94,15 @@ this repository.
 ## License
 
 MIT — see [LICENSE](LICENSE). The datasets are distributed by their owners under their own terms.
+
+## Repeated subject-wise splits
+
+Six random splits (seed 42 plus seeds 1–5, `.github/workflows/repeated-splits.yml`); mean ± SD of test accuracy. Raw values: `results_reference/repeated_splits.json`.
+
+| Model | Subject-wise (L0) | Trial-level (L2) | As executed |
+|---|---|---|---|
+| EEGNet | 74.67 ± 2.80% | – | – |
+| 1D CNN | 65.62 ± 2.12% | 68.35 ± 2.33% | 67.60 ± 6.90% |
+| CSP+CNN | 61.29 ± 2.05% | 59.95 ± 1.63% | – |
+
+The paired L2 − L0 difference is +2.73 ± 3.98 points for the 1D CNN (positive in four of six splits) and −1.3 ± 3.5 points for CSP+CNN.
