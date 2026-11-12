@@ -46,7 +46,7 @@ data, `train_test_subject_overlap` (0 under the leakage-safe protocol).
 | Result in the paper | Value | Source of the number | Re-run with this repository? |
 |---|---|---|---|
 | EEGNet, L0 | 75.16 % | Original notebook, output preserved in `original_notebooks/` | **Re-run: 74.68 %** (Colab T4, TF 2.21) |
-| Four-class CNN | 66 % | Original notebook, output preserved (66.48 % at 100 epochs) | **Re-run: 64.63 % trial-level, 58.33 % subject-wise (L0); 62.34 ± 4.98 % over five subject-wise splits** |
+| Four-class CNN | 66 % | Original notebook, output preserved (66.48 % at 100 epochs) | **Re-run: 64.63 % trial-level, 58.33 % subject-wise (L0); 63.31 ± 5.05 % over six subject-wise splits** |
 | CSP+CNN, L0 | 59.39 % | Re-run of this code (Colab T4); original 62.35 % run used a split that could not be recovered | **Re-run: 59.39 % (L0), 61.33 % (L2)** |
 | 1D CNN, L0 | 64.65 % | Re-run of this code (Colab T4) | **Re-run: 64.65 % (L0)** |
 | Ablation, 1D CNN L2 / as executed | 68.31 % / 69.53 % | Re-run of this code (Colab T4); replaces the unsupported 80.02 % | **Re-run** |
@@ -107,6 +107,6 @@ Six random splits (seed 42 plus seeds 1–5, `.github/workflows/repeated-splits.
 
 The paired L2 − L0 difference is +2.73 ± 3.98 points for the 1D CNN (positive in four of six splits) and −1.3 ± 3.5 points for CSP+CNN.
 
-Four-class CNN, subject-wise split, 100 epochs: 62.34 ± 4.98% over five splits (58.33, 67.86, 64.94, 55.95, 64.61; seed 2 exceeded the six-hour CI limit and is not included), against 64.63% for a single matched trial-level re-run.
+Four-class CNN, subject-wise split, 100 epochs: 63.31 ± 5.05% over six splits (58.33, 67.86, 68.18, 64.94, 55.95, 64.61), against 64.63% for a single matched trial-level re-run.
 
 Seeds 3 and 4 report identical trial-level accuracies; `seed-check.yml` confirms for CSP+CNN that the test sets and confusion matrices differ and only the totals coincide.
